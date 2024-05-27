@@ -36,7 +36,8 @@ class DBStorage:
                                       format(HBNB_MYSQL_USER,
                                              HBNB_MYSQL_PWD,
                                              HBNB_MYSQL_HOST,
-                                             HBNB_MYSQL_DB))
+                                             HBNB_MYSQL_DB,
+                                             ool_pre_ping=True))
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -74,3 +75,23 @@ class DBStorage:
     def close(self):
         """call remove() method on the private session attribute"""
         self.__session.remove()
+
+    def get(self, cls, id):
+        """retives one object from storage base on cls and id."""
+
+        all_objs = self.all(cls)
+        for obj in all_objs.keys():
+            name_id = obj.split('.')
+            if name_id[0] is cls and name_id[1] is id:
+                return obj
+        return None
+
+    def count(self, cls=None):
+        '''counts number of objects of class in storage.'''
+
+        objs = self.all(cls)
+        count = 0
+        for key in objs.keys():
+            count += 1
+        return count
+
