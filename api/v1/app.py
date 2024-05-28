@@ -1,4 +1,4 @@
-#!/urs/bin/python3
+#!/usr/bin/python3
 ''' Falsk instance.'''
 from api.v1.views.__init__ import app_views
 from flask import Flask, jsonify
@@ -13,8 +13,8 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def close(exception):
-    #Teardown callback.
-    
+    # Teardown callback.
+
     storage.close()
 
 
