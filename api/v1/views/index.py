@@ -12,12 +12,14 @@ status = [
             "status": "OK"
         }
         ]
-        
+
+
 @app_views.route('/status')
 def show_status():
     '''displau json.'''
 
     return jsonify(status)
+
 
 @app_views.route('/stats')
 def obj_count():
