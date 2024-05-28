@@ -94,4 +94,3 @@ class DBStorage:
         for key in objs.keys():
             count += 1
         return count
-
