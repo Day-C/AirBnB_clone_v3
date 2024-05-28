@@ -13,19 +13,16 @@ storage.reload()
 def show_status():
     '''Displau status data in json format.'''
 
-    status = {"status": "OK"}
-    return jsonify(status)
+    return jsonify({"status": "OK"})
 
 
 @app_views.route('/stats')
 def obj_count():
     '''Retrive and count number of each onject by type.'''
 
-    # Retive all objects in the db
     all_objs = storage.all(None)
     cls_cnt = {}
     for obj in all_objs.keys():
-        # Split the keys to get objects name
         name_id = obj.split('.')
         if name_id[0] in cls_cnt:
             cls_cnt[name_id[0]] = cls_cnt[name_id[0]] + 1
