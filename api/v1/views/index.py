@@ -1,4 +1,4 @@
-#!/usr/bin/pyton3
+#!/usr/bin/python3
 '''base for api.'''
 from api.v1.views.__init__ import app_views
 from flask import jsonify
