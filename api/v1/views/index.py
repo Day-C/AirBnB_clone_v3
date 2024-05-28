@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-'''base for api.'''
+'''Base for api.'''
 from api.v1.views.__init__ import app_views
 from flask import jsonify
 from models.engine.db_storage import DBStorage
+
 
 storage = DBStorage()
 storage.reload()
@@ -16,7 +17,7 @@ status = [
 
 @app_views.route('/status')
 def show_status():
-    '''displau json.'''
+    '''Displau status in json.'''
 
     return jsonify(status)
 
