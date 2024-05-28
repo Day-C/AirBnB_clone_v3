@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Base for api.'''
+'''Endpoint toto display status and states data.'''
 from api.v1.views.__init__ import app_views
 from flask import jsonify
 from models.engine.db_storage import DBStorage
@@ -8,17 +8,12 @@ from models.engine.db_storage import DBStorage
 storage = DBStorage()
 storage.reload()
 
-status = [
-        {
-            "status": "OK"
-        }
-        ]
-
 
 @app_views.route('/status')
 def show_status():
-    '''Displau status in json.'''
+    '''Displau status data in json format.'''
 
+    status = {"status": "OK"}
     return jsonify(status)
 
 
