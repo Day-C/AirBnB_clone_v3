@@ -1,31 +1,31 @@
 #!/usr/bin/python3
 '''Endpoint toto display status and states data.'''
-from api.v1.views.__init__ import app_views
+from . import app_views
 from flask import jsonify
-from models.engine.db_storage import DBStorage
+import models
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.review import Review
+from models.place import Place
+from models.state import State
 
-
-storage = DBStorage()
-storage.reload()
-
+classes = {"amenities": Amenity, "cities": City, "places": Place, "reviews": Review, "states": State, "users": User}
 
 @app_views.route('/status')
 def show_status():
     '''Displau status data in json format.'''
 
-    return jsonify({"status": "OK"})
+    stus = {"status": "OK"}
+    return jsonify(stus)
 
 
 @app_views.route('/stats')
 def obj_count():
     '''Retrive and count number of each onject by type.'''
 
-    all_objs = storage.all(None)
-    cls_cnt = {}
-    for obj in all_objs.keys():
-        name_id = obj.split('.')
-        if name_id[0] in cls_cnt:
-            cls_cnt[name_id[0]] = cls_cnt[name_id[0]] + 1
-        else:
-            cls_cnt[name_id[0]] = 1
-    return jsonify(cls_cnt)
+    results = {}
+    for key in classes.keys():
+        results[key] = models.storage.count(classes[key])
+
+    return jsonify(results)
